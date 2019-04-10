@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.example.videogamecatalog.R;
 import com.example.videogamecatalog.model.Game;
 import com.example.videogamecatalog.view.GameViewHolder;
+import com.example.videogamecatalog.view.fragment.FragmentListener;
 
 import java.util.List;
 
@@ -17,10 +18,12 @@ public class GameAdapter
         extends RecyclerView.Adapter<GameViewHolder> {
 
     private List<Game> gamesList;
+    private FragmentListener listener;
 
-    public GameAdapter(List<Game> gamesList) {
+    public GameAdapter(List<Game> gamesList, FragmentListener listener) {
         Log.d("TAG", gamesList.get(0).getName());
         this.gamesList = gamesList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -33,7 +36,7 @@ public class GameAdapter
 
     @Override
     public void onBindViewHolder(@NonNull GameViewHolder holder, int position) {
-        holder.onBind(gamesList.get(position));
+        holder.onBind(gamesList.get(position), listener);
     }
 
     @Override

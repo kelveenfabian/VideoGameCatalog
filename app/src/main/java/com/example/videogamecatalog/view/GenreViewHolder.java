@@ -51,7 +51,7 @@ public class GenreViewHolder
                                                          ";\n" +
                                                          "where genres = " +
                                                          genre.getId() +
-                                                         ";");
+                                                         ";" + "sort name asc;" );
 
             IGDBApi.getService(IGDBService.class)
                    .getGamesByGenre(requestBody)
