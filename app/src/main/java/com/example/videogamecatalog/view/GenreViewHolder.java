@@ -62,7 +62,7 @@ public class GenreViewHolder
                                               Response<List<Game>> response) {
                            List<Game> allDaGames = response.body();
                            if (allDaGames != null && !allDaGames.isEmpty()) {
-                               listener.GenreToGamesFrag(allDaGames);
+                               listener.genreToGamesFrag(allDaGames);
                                Toast.makeText(itemView.getContext(),
                                               "id: " +
                                               genre.getId() +
