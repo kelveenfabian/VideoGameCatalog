@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface FragmentListener {
 
-    void GenreToGamesFrag(List<Game> gamesList);
+    void genreToGamesFrag(List<Game> gamesList);
+
+    void displayGameInfoFrag(Game game);
 }

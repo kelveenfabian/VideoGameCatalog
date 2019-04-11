@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.example.videogamecatalog.R;
 import com.example.videogamecatalog.model.Game;
+import com.example.videogamecatalog.view.fragment.FragmentListener;
 
 public class GameViewHolder
         extends RecyclerView.ViewHolder {
@@ -18,7 +19,8 @@ public class GameViewHolder
         gameTitle = itemView.findViewById(R.id.game_title);
     }
 
-    public void onBind(Game game) {
+    public void onBind(final Game game, FragmentListener listener) {
         gameTitle.setText(game.getName());
+        gameTitle.setOnClickListener(v -> listener.displayGameInfoFrag(game));
     }
 }

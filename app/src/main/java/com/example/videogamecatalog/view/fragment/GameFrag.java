@@ -1,6 +1,7 @@
 package com.example.videogamecatalog.view.fragment;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -24,11 +25,10 @@ import java.util.List;
  */
 public class GameFrag
         extends Fragment {
-
+    private FragmentListener listener;
     private ArrayList<Game> gameList = new ArrayList<>();
     public static final String GAMELIST = "GAMELIST";
     private RecyclerView rv;
-    private GameAdapter adapter;
 
     public GameFrag() {
         // Required empty public constructor
@@ -67,12 +67,28 @@ public class GameFrag
     }
 
     public void showGameRecyclerView(List<Game> gameList) {
-        adapter = new GameAdapter(gameList);
+        GameAdapter adapter = new GameAdapter(gameList, listener);
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     public void initializeViews(View view) {
         rv = view.findViewById(R.id.game_rv);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof FragmentListener) {
+            listener = (FragmentListener) context;
+        } else {
+            throw new RuntimeException(context.toString() + " must implement FragmentListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listener = null;
     }
 }

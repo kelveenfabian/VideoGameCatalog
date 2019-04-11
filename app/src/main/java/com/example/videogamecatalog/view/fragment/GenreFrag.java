@@ -63,12 +63,6 @@ public class GenreFrag
         rv = view.findViewById(R.id.genre_rv);
     }
 
-    public void showGenreRecyclerView() {
-        GenreAdapter adapter = new GenreAdapter(genreList, listener);
-        rv.setAdapter(adapter);
-        rv.setLayoutManager(new LinearLayoutManager(getContext()));
-    }
-
     public void getRetrofit() {
         IGDBApi.getService(IGDBService.class)
                .getGenre("*", "20")
@@ -91,6 +85,11 @@ public class GenreFrag
                                       Toast.LENGTH_SHORT).show();
                    }
                });
+    }
+    public void showGenreRecyclerView() {
+        GenreAdapter adapter = new GenreAdapter(genreList, listener);
+        rv.setAdapter(adapter);
+        rv.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     @Override
