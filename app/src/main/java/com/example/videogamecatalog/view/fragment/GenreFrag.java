@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.support.v7.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.videogamecatalog.R;
@@ -31,11 +32,14 @@ import retrofit2.Response;
  * A simple {@link Fragment} subclass.
  */
 public class GenreFrag
-        extends Fragment {
+        extends Fragment
+        implements SearchView.OnQueryTextListener {
 
     private RecyclerView rv;
     private List<Genre> genreList = new ArrayList<>();
     private FragmentListener listener;
+    private GenreAdapter adapter;
+    private SearchView genreSearchView;
 
     public GenreFrag() {
         // Required empty public constructor
@@ -57,10 +61,16 @@ public class GenreFrag
         super.onViewCreated(view, savedInstanceState);
         initializeViews(view);
         getRetrofit();
+        searchViewListener();
     }
 
     public void initializeViews(View view) {
         rv = view.findViewById(R.id.genre_rv);
+        genreSearchView = view.findViewById(R.id.genre_searchview);
+    }
+
+    public void searchViewListener() {
+        genreSearchView.setOnQueryTextListener(this);
     }
 
     public void getRetrofit() {
@@ -75,6 +85,7 @@ public class GenreFrag
                        //                       Log.d("TAG", response.toString());
                        genreList.addAll(response.body());
                        showGenreRecyclerView();
+
                    }
 
                    @Override
@@ -87,7 +98,7 @@ public class GenreFrag
                });
     }
     public void showGenreRecyclerView() {
-        GenreAdapter adapter = new GenreAdapter(genreList, listener);
+        adapter = new GenreAdapter(genreList, listener);
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
     }
@@ -106,5 +117,24 @@ public class GenreFrag
     public void onDetach() {
         super.onDetach();
         listener = null;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        List<Genre> newGenreList = new ArrayList<>();
+
+        for (Genre genre : genreList) {
+            if (genre.getName().toLowerCase().startsWith(newText.toLowerCase())) {
+                newGenreList.add(genre);
+            }
+        }
+        adapter.setData(newGenreList);
+
+        return false;
     }
 }

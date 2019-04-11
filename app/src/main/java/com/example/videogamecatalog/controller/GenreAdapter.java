@@ -41,4 +41,9 @@ public class GenreAdapter
     public int getItemCount() {
         return genreList.size();
     }
+
+    public void setData(List<Genre> genreList) {
+        this.genreList = genreList;
+        notifyDataSetChanged();
+    }
 }
