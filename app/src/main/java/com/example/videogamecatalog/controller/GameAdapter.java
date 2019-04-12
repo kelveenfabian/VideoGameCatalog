@@ -44,4 +44,9 @@ public class GameAdapter
         Log.d("TAG", "" + gamesList.size());
         return gamesList.size();
     }
+
+    public void setData(List<Game> gamesList) {
+        this.gamesList = gamesList;
+        notifyDataSetChanged();
+    }
 }

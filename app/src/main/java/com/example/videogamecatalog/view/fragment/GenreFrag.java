@@ -65,7 +65,7 @@ public class GenreFrag
     }
 
     public void initializeViews(View view) {
-        rv = view.findViewById(R.id.genre_rv);
+        rv = view.findViewById(R.id.genre_recyclerview);
         genreSearchView = view.findViewById(R.id.genre_searchview);
     }
 

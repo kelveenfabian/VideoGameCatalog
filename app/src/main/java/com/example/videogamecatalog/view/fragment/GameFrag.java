@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,11 +25,14 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class GameFrag
-        extends Fragment {
+        extends Fragment
+        implements SearchView.OnQueryTextListener {
     private FragmentListener listener;
     private ArrayList<Game> gameList = new ArrayList<>();
     public static final String GAMELIST = "GAMELIST";
     private RecyclerView rv;
+    private SearchView gameSearchView;
+    GameAdapter adapter;
 
     public GameFrag() {
         // Required empty public constructor
@@ -51,6 +55,10 @@ public class GameFrag
 
     }
 
+    public void searchViewListener() {
+        gameSearchView.setOnQueryTextListener(this);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
@@ -64,16 +72,18 @@ public class GameFrag
         super.onViewCreated(view, savedInstanceState);
         initializeViews(view);
         showGameRecyclerView(gameList);
+        searchViewListener();
     }
 
     public void showGameRecyclerView(List<Game> gameList) {
-        GameAdapter adapter = new GameAdapter(gameList, listener);
+        adapter = new GameAdapter(gameList, listener);
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     public void initializeViews(View view) {
-        rv = view.findViewById(R.id.game_rv);
+        rv = view.findViewById(R.id.game_recyclerview);
+        gameSearchView = view.findViewById(R.id.game_searchview);
     }
 
     @Override
@@ -90,5 +100,23 @@ public class GameFrag
     public void onDetach() {
         super.onDetach();
         listener = null;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        List<Game> newGameList = new ArrayList<>();
+
+        for (Game game : gameList) {
+            if (game.getName().toLowerCase().startsWith(s.toLowerCase())) {
+                newGameList.add(game);
+            }
+        }
+        adapter.setData(newGameList);
+        return false;
     }
 }
