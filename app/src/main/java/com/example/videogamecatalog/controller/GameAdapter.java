@@ -2,7 +2,6 @@ package com.example.videogamecatalog.controller;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +19,8 @@ public class GameAdapter
     private List<Game> gamesList;
     private FragmentListener listener;
 
+
     public GameAdapter(List<Game> gamesList, FragmentListener listener) {
-        Log.d("TAG", gamesList.get(0).getName());
         this.gamesList = gamesList;
         this.listener = listener;
     }
@@ -41,7 +40,6 @@ public class GameAdapter
 
     @Override
     public int getItemCount() {
-        Log.d("TAG", "" + gamesList.size());
         return gamesList.size();
     }
 

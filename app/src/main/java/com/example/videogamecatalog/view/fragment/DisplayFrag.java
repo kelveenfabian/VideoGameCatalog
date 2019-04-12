@@ -8,10 +8,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import com.example.videogamecatalog.R;
 import com.example.videogamecatalog.model.Game;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,11 +24,11 @@ public class DisplayFrag
 
 
     public static final String NAME = "NAME";
-    public static final String SUMMARY = "SUMMARY";
+    public static final String URL = "URL";
+    public String url;
     private String name;
-    private String summary;
     private TextView nameView;
-    private TextView summaryView;
+    private WebView webView;
 
     public DisplayFrag() {
         // Required empty public constructor
@@ -35,7 +38,7 @@ public class DisplayFrag
         DisplayFrag displayFrag = new DisplayFrag();
         Bundle bundle = new Bundle();
         bundle.putString(NAME, game.getName());
-        bundle.putString(SUMMARY, game.getSummary());
+        bundle.putString(URL, game.getUrl());
         displayFrag.setArguments(bundle);
         return  displayFrag;
     }
@@ -45,7 +48,7 @@ public class DisplayFrag
         super.onCreate(savedInstanceState);
         if(getArguments() != null){
             name = getArguments().getString(NAME);
-            summary = getArguments().getString(SUMMARY);
+            url = getArguments().getString(URL);
         }
     }
 
@@ -59,10 +62,20 @@ public class DisplayFrag
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        nameView = view.findViewById(R.id.game_name);
-        summaryView = view.findViewById(R.id.game_summary);
-
-        nameView.setText(name);
-        summaryView.setText(summary);
+        initializeViews(view);
+        setViews();
     }
+
+    public void initializeViews(View view){
+        nameView = view.findViewById(R.id.game_name);
+        webView = view.findViewById(R.id.game_website);
+    }
+
+    public void setViews(){
+        nameView.setText(name);
+        webView.setWebViewClient(new WebViewClient());
+        webView.loadUrl(url);
+    }
+
 }
+

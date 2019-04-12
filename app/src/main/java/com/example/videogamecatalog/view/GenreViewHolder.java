@@ -14,7 +14,6 @@ import com.example.videogamecatalog.network.IGDBService;
 import com.example.videogamecatalog.view.fragment.FragmentListener;
 
 import java.util.List;
-
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,7 +22,6 @@ import retrofit2.Response;
 public class GenreViewHolder
         extends RecyclerView.ViewHolder {
 
-    public static final String BASE_QUERY = "fields *;\n";
     private TextView genreTitle;
 
     public GenreViewHolder(@NonNull View itemView) {
@@ -34,24 +32,13 @@ public class GenreViewHolder
     public void onBind(Genre genre, FragmentListener listener) {
         genreTitle.setText(genre.getName());
         genreTitle.setOnClickListener(v -> {
-            //            // START QUERY FORMATION
-            //            String finalQuery = BASE_QUERY + "where genres = %s;";
-            //            boolean needsOffset = true;
-            ////            if (needsOffset) {
-            ////                finalQuery += "offset = %d;";
-            ////            }
-            //            int offset = 50;
-            //            String content = String.format(finalQuery, genre.getId());
-            //            // END QUERY FORMATION
+            String content = "fields *;\n" +
+                             "limit " + 25 + ";" +
+                             "where genres = " +
+                             genre.getId() + ";";
 
             RequestBody requestBody = RequestBody.create(null,
-                                                         BASE_QUERY +
-                                                         "limit " +
-                                                         25 +
-                                                         ";\n" +
-                                                         "where genres = " +
-                                                         genre.getId() +
-                                                         ";" + "sort name asc;" );
+                                                         content);
 
             IGDBApi.getService(IGDBService.class)
                    .getGamesByGenre(requestBody)
@@ -63,12 +50,6 @@ public class GenreViewHolder
                            List<Game> allDaGames = response.body();
                            if (allDaGames != null && !allDaGames.isEmpty()) {
                                listener.genreToGamesFrag(allDaGames);
-                               Toast.makeText(itemView.getContext(),
-                                              "id: " +
-                                              genre.getId() +
-                                              "\n\n" +
-                                              allDaGames.get(0).getName(),
-                                              Toast.LENGTH_LONG).show();
                            } else {
                                Toast.makeText(itemView.getContext(),
                                               "No games found!",
@@ -79,7 +60,7 @@ public class GenreViewHolder
                        @Override
                        public void onFailure(Call<List<Game>> call, Throwable t) {
                            Toast.makeText(itemView.getContext(),
-                                          "Shit, we failed!",
+                                          "Failed to get response from API",
                                           Toast.LENGTH_LONG).show();
                        }
                    });

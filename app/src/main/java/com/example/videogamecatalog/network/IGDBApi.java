@@ -15,7 +15,7 @@ public class IGDBApi {
 
     private IGDBApi() {}
 
-    public static Retrofit getInstance() {
+    private static Retrofit getInstance() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient httpClient = new OkHttpClient.Builder().addInterceptor(interceptor).build();
