@@ -8,13 +8,11 @@ public class Game
 
     private int id;
     private String name;
-    private String summary;
     private String url;
 
     protected Game(Parcel in) {
         id = in.readInt();
         name = in.readString();
-        summary = in.readString();
         url = in.readString();
     }
 
@@ -39,9 +37,6 @@ public class Game
         return name;
     }
 
-    public String getSummary() {
-        return summary;
-    }
 
     public String getUrl() {
         return url;
@@ -57,7 +52,6 @@ public class Game
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
         dest.writeString(name);
-        dest.writeString(summary);
         dest.writeString(url);
     }
 }

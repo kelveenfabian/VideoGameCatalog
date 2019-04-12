@@ -77,8 +77,8 @@ public class GameFrag
 
     public void showGameRecyclerView(List<Game> gameList) {
         adapter = new GameAdapter(gameList, listener);
-        rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
+        rv.setAdapter(adapter);
     }
 
     public void initializeViews(View view) {

@@ -3,7 +3,6 @@ package com.example.videogamecatalog.view;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-
 import com.example.videogamecatalog.R;
 import com.example.videogamecatalog.model.Game;
 import com.example.videogamecatalog.view.fragment.DisplayFrag;

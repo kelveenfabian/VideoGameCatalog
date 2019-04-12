@@ -8,11 +8,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v7.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.videogamecatalog.R;
@@ -80,12 +80,8 @@ public class GenreFrag
 
                    @Override
                    public void onResponse(Call<List<Genre>> call, Response<List<Genre>> response) {
-                       //                       Log.d("TAG", "" + response.body().size()); //.get(0).getName());
-                       //                       Log.d("TAG", call.request().toString());
-                       //                       Log.d("TAG", response.toString());
                        genreList.addAll(response.body());
                        showGenreRecyclerView();
-
                    }
 
                    @Override
@@ -99,8 +95,9 @@ public class GenreFrag
     }
     public void showGenreRecyclerView() {
         adapter = new GenreAdapter(genreList, listener);
-        rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
+        rv.setAdapter(adapter);
+
     }
 
     @Override
