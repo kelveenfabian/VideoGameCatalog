@@ -2,14 +2,16 @@
 VideoGameCatalog is an app that allows users to search for information about video games based on the genre the game pertains to.
 
 
-Splash Screen            |  SearchView
+Splash Screen            |  List of game genres
 :-------------------------:|:-------------------------:
-<img src="images/planet_home.png" width="250" height="500">  |  <img src="images/planet_search.png" width="250" height="500">
+<img src="images/splash.png" width="250" height="500">  |  <img src="images/genres.png" width="250" height="500">
 
-RecyclerView             |  SearchView
+List of games             |  Game info
 :-------------------------:|:-------------------------:
-<img src="images/planet_home.png" width="250" height="500">  |  <img src="images/planet_search.png" width="250" height="500">
+<img src="images/games.png" width="250" height="500">  |  <img src="images/displaygame.png" width="250" height="500">
 
-RecyclerView             |  SearchView
+Contact menu             |  SearchView
 :-------------------------:|:-------------------------:
-<img src="images/planet_home.png" width="250" height="500">  |  <img src="images/planet_search.png" width="250" height="500">
+<img src="images/appmenu.png" width="250" height="500">  |  <img src="images/searchview.png" width="250" height="500">
+
+
