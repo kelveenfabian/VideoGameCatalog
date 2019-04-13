@@ -1,8 +1,12 @@
 package com.example.videogamecatalog.view;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+
 import com.example.videogamecatalog.R;
 import com.example.videogamecatalog.model.Game;
 import com.example.videogamecatalog.view.fragment.DisplayFrag;
@@ -24,10 +28,33 @@ public class MainActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         showSplashFrag();
-        new Handler().postDelayed(this::splashToGenreFrag, 1500);
-
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.contact_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+
+        switch(itemId){
+            case R.id.github_item:
+                String githubWebAddress = getString(R.string.github_web_text);
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(githubWebAddress));
+                startActivity(intent);
+                return true;
+            case R.id.linkedin_item:
+                String linkedinWebAddress = getString(R.string.linkedin_web_text);
+                Intent intent1 = new Intent(Intent.ACTION_VIEW, Uri.parse(linkedinWebAddress));
+                startActivity(intent1);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     public void showSplashFrag() {
         getSupportFragmentManager().beginTransaction()
@@ -35,6 +62,7 @@ public class MainActivity
                                    .commit();
     }
 
+    @Override
     public void splashToGenreFrag() {
         getSupportFragmentManager().beginTransaction()
                                    .replace(R.id.catalog_frag, GenreFrag.newInstance())

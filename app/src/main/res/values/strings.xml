@@ -4,4 +4,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="more_info_text">More Info</string>
+    <string name="linkedin_text">LinkedIn</string>
+    <string name="github_text">Github</string>
+    <string name="github_web_text">https://github.com/kelveenfabian/</string>
+    <string name="linkedin_web_text">https://www.linkedin.com/in/kelveenfabian/</string>
 </resources>
