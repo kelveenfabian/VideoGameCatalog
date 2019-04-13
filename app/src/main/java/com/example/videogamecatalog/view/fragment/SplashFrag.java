@@ -3,6 +3,7 @@ package com.example.videogamecatalog.view.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -50,6 +51,19 @@ public class SplashFrag
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        CountDownTimer countDownTimer = new CountDownTimer(1500L, 500L) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                listener.splashToGenreFrag();
+            }
+        };
+        countDownTimer.start();
     }
 
     @Override
