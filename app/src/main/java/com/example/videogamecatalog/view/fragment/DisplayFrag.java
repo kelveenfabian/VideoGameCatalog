@@ -16,9 +16,6 @@ import com.example.videogamecatalog.R;
 import com.example.videogamecatalog.model.Game;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class DisplayFrag
         extends Fragment {
 

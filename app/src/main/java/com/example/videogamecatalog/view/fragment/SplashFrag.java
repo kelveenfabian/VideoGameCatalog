@@ -13,9 +13,6 @@ import android.view.ViewGroup;
 
 import com.example.videogamecatalog.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class SplashFrag
         extends Fragment {
 
