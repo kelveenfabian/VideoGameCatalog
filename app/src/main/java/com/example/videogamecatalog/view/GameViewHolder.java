@@ -21,6 +21,8 @@ public class GameViewHolder
 
     public void onBind(final Game game, FragmentListener listener) {
         gameTitle.setText(game.getName());
-        gameTitle.setOnClickListener(v -> listener.displayGameInfoFrag(game));
+        gameTitle.setOnClickListener(v -> {
+            listener.displayGameInfoFrag(game);
+        });
     }
 }

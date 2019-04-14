@@ -21,9 +21,6 @@ import com.example.videogamecatalog.model.Game;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class GameFrag
         extends Fragment
         implements SearchView.OnQueryTextListener {
